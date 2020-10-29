@@ -13,6 +13,7 @@
 
 
 # Get whoami in AWS, who is the user running this shell script
+TEST_AUTH=$(aws sts get-caller-identity --profile default --region us-east-1 2> /dev/null && echo OK || echo FAILED)
 GETCALLER=$($AWSCLI sts get-caller-identity $PROFILE_OPT --region $REGION)
 ACCOUNT_NUM=$(echo $GETCALLER | jq -r '.Account')
 CALLER_ARN=$(echo $GETCALLER | jq -r '.Arn')
@@ -20,7 +21,7 @@ USER_ID=$(echo $GETCALLER | jq -r '.UserId')
 AWS_PARTITION=$(echo $CALLER_ARN| cut -d: -f2)
 
 getWhoami(){
-
+GETCALLER=$($AWSCLI sts get-caller-identity $PROFILE_OPT --region $REGION)
   if [[ 255 -eq $? ]]; then
           # Failed to get own identity ... exit
           echo -e "$RED ERROR Getting credentials to run Prowler - EXITING! $NORMAL"
@@ -41,8 +42,8 @@ getWhoami(){
       exit $EXITCODE
     fi
     printCsvHeader
-    textTitle "0.0" "Show report generation info" "NOT_SCORED" "SUPPORT"
-    textInfo "ARN: $CALLER_ARN  TIMESTAMP: $SCRIPT_START_TIME"
+    # textTitle "0.0" "Show report generation info" "NOT_SCORED" "SUPPORT"
+    # textInfo "ARN: $CALLER_ARN  TIMESTAMP: $SCRIPT_START_TIME"
   elif [[ "$MODE" == "json" || "$MODE" == "json-asff" ]]; then
     :
   else
