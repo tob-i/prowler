@@ -4,4 +4,4 @@
       - *.sh
       - ./groups/*
       - ./checks/*
-      - ./include
+      - ./include/*
