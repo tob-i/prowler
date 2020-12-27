@@ -1,0 +1,7 @@
+- name: script
+  production:
+    include:
+      - *.sh
+      - ./groups/*
+      - ./checks/*
+      - ./include
