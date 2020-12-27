@@ -1,6 +1,9 @@
+component_depth: 1
+languages:
 - name: script
   production:
     include:
       - /groups/.*
       - /checks/.*
       - /include/.*
+- name: python
