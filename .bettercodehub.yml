@@ -6,4 +6,5 @@ languages:
       - /groups/.*
       - /checks/.*
       - /include/.*
+      - /prowler
 - name: python
